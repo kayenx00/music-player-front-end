@@ -1,26 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import SongsList from './components/SongsList';
+import SongSearchByName from './components/SongSearchByName';
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  const[comp, setComp] = useState("");
+  const handleClick = (name) => {
+    setComp(name)
+  }
+  if(comp === "SongsList"){
+    return 
+      <SongsList />}
+  else if (comp === "SongsListByName"){
+    return 
+      <SongSearchByName />
+  }
+  else{
+    return (
+      <div className="App">
+        <button onlick = {handleClick("SongsList")}>Search Songs</button>
+        <button onlick = {handleClick("SongsListByName")}>Search Song</button>
+      </div>
+    )
+  }
+};
 
 export default App;
