@@ -1,14 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 function SongsList(){
-    const [songs, setSongs] = useState({object :[]})
-    const [name, setName] = useState();
+    const [songs, setSongs] = useState({songs :[]})
     useEffect(() => async () => {
-        const result = await axios.get('http://localhost:8080/api/music/all');
+        const result = await axios.get('http://localhost:8080/music/all');
         setSongs(result.data);
 }, [])
-
-
     return(
         <div>
             <h2 className="text-center">Song List</h2>
@@ -27,12 +24,12 @@ function SongsList(){
                         {
                             
                             songs.object.map(song => 
-                                <tr>
+                                <tr key = {song.id}>
                                     <td>{song.name}</td>
                                     <td>{song.author.name}</td>
                                     <td>{song.genre.name}</td>
                                     <td>
-                                        <audio controls autoplay>
+                                        <audio controls autoPlay>
                                             <source src={song.src} type="audio/mpeg" />
                                         </audio>
                                     </td>
