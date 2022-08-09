@@ -1,8 +1,6 @@
 import axios from "axios";
 import React from "react";
 import {useState, useEffect} from 'react'
-import { API_UpdateSong } from "../../../apiUrl/API_URL";
-import UpdateSong from "../../UpdateSong";
 function PlaySong(song){
 const songToUpdate = song;
 console.log(songToUpdate)

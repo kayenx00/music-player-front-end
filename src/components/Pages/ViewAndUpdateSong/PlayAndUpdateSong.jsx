@@ -4,8 +4,7 @@ import axios from 'axios';
 import { useQuery } from 'react-query';
 import { API_All } from '../../../apiUrl/API_URL';
 import PlaySong from './PlaySong';
-import UpdateSong from '../../UpdateSong';
-
+import UpdateSong from './UpdateSong';
 function PlayAndUpdateSong() {
     const url = API_All + 'get?id='
     console.log(url)
