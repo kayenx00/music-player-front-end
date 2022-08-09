@@ -15,14 +15,18 @@ function AddSong() {
     const {src, thumbnail, name, author, genre} = song;
     const onSubmit = async (e) => {
         e.preventDefault();
+        let s = API_All + 'upload?src=' +`${song.src}`+'&thumbnail=' +
+        `${song.thumbnail}` + '&name=' + `${song.name}`+ 
+        '&author=' + `${song.author}` + '&genre=' + `${song.genre}`
+        console.log(s)
         try {
         const result = await axios({
             method: 'post',
-            url : API_All + 'upload?src=' +`${song.src}`+'?thumbnail=' +
-             `${song.thumbnail}` + '?name=' + `${song.name}`+ 
-             '?author=' + `${song.author}` + '?genre=' + `${song.genre}`
+            url : API_All + 'upload?src=' +`${song.src}`+'&thumbnail=' +
+             `${song.thumbnail}` + '&name=' + `${song.name}`+ 
+             '&author=' + `${song.author}` + '&genre=' + `${song.genre}`
         }) }catch{
-            navigate('/')
+            navigate('/add/user')
         }
         navigate('/')
     }

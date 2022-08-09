@@ -3,6 +3,7 @@ import axios from 'axios';
 import {Link} from 'react-router-dom'
 import { API_All } from '../../../apiUrl/API_URL';
 import { useNavigate, useParams } from "react-router-dom";
+import AddSong from '../AddSong/AddSong';
 function SongList({filteredSongs}){
     let navigate = useNavigate()
     const filtered = filteredSongs
@@ -17,7 +18,9 @@ function SongList({filteredSongs}){
             }
         })
     }
-
+    const AddSong = () =>{
+        navigate('/add/song')
+    }
     const deleteSongs = async checked =>{
         // await axios.delete(API_All + '')
         navigate("/")
@@ -29,6 +32,9 @@ function SongList({filteredSongs}){
 
     return (
         <div>
+            <button onClick ={() => AddSong()}>
+                Add Song
+                </button>
             <div className = 'rows'>
                 <table className = "table table-striped table-bordered">
                     <thead>
