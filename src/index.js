@@ -4,13 +4,16 @@ import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import { QueryClient, QueryClientProvider } from "react-query";
 import 'bootstrap/dist/css/bootstrap.min.css'
+
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <QueryClientProvider client = {queryClient}>
     <App />
-  </React.StrictMode>
+  </QueryClientProvider>
 );
 
 // If you want your app to work offline and load faster, you can change
