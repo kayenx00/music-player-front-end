@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import SongTable from './SongTable';
-import { API_All } from '../apiUrl/API_URL';
 import axios from 'axios';
+import { API_All } from '../../../apiUrl/API_URL';
 import SongsList from './SongList';
 function ShowSongTable({details}) {
     const [searchField, setSearchField] = useState("")

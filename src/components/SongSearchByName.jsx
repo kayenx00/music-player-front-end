@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import {API_All, API_getSong} from '../apiUrl/API_URL'
-import PlaySong from './PlaySong';
+import PlaySong from './Pages/ViewAndUpdateSong/PlaySong';
 import UpdateSong from './UpdateSong';
 function SongSearchByName(){
     // const [editMode, isEditmode] = useState(false)

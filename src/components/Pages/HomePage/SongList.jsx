@@ -1,6 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom'
+import { API_All } from '../../../apiUrl/API_URL';
+import { useNavigate, useParams } from "react-router-dom";
 function SongList({filteredSongs}){
+    let navigate = useNavigate()
     const filtered = filteredSongs
     const [checked, setChecked] = useState([])
     const handleCheckBox = (id) =>{
@@ -14,6 +18,11 @@ function SongList({filteredSongs}){
         })
     }
 
+    const deleteSongs = async checked =>{
+        // await axios.delete(API_All + '')
+        navigate("/")
+    }
+
     const handleClick = () => {
         console.log({ids : checked})
     }
@@ -24,7 +33,11 @@ function SongList({filteredSongs}){
                 <table className = "table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th></th>
+                            <th>Select</th>
+                            <th>Song Name</th>
+                            <th>Song Author</th>
+                            <th>Song Genre</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,17 +53,22 @@ function SongList({filteredSongs}){
                                     <td>{f.name}</td>
                                     <td>{f.author.name}</td>
                                     <td>{f.genre.name}</td>
+                                    <td>
+                                        <Link  to={`/viewAndUpdate/${f.id}`}>
+                                            View
+                                        </Link>
+                                    </td>
 
                                 </tr>
                                 
                             )
                         }
                         <tr>
-                        <td>
-                                        <button onClick={()=> handleClick()} >
-                                        Delete
-                                        </button>
-                                    </td>
+                            <td>
+                                <button onClick = {() => deleteSongs(checked)}>
+                                    Delete
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
