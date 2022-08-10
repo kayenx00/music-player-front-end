@@ -21,9 +21,23 @@ function SongList({filteredSongs}){
     const AddSong = () =>{
         navigate('/add/song')
     }
-    const deleteSongs = async checked =>{
+    const deleteSongs = async () =>{
+
         // await axios.delete(API_All + '')
-        navigate("/")
+        const s = API_All + 'delete'
+        const formData = new FormData();
+        for(let i = 0; i < checked.length; i++){
+            formData.append("id", checked[i])
+        }
+        try{
+            const result = axios({
+                method:'delete',
+                url: s,
+                data: formData
+            })
+        }
+         catch {navigate('/add/Song')}
+         window.location.reload()
     }
 
     const handleClick = () => {

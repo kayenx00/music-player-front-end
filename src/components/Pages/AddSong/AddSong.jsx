@@ -4,61 +4,79 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { API_All } from '../../../apiUrl/API_URL';
 function AddSong() {
     const navigate = useNavigate();
-    const [song, setSong] = useState({
-        src: "",
-        thumbnail: "",
-        name: "",
-        author: "",
-        genre: ""   
+    const [src, setSrc] = useState(null)
+    const [thumbnail, setThumbnail] = useState(null)
+    const [name, setName] = useState("")
+    const [author, setAuthor] = useState("")  
+    const [genre, setGenre] = useState("")
+    // const [song, setSong] = useState({
+    //     src: "",
+    //     thumbnail: "",
+    //     name: "",
+    //     author: "",
+    //     genre: ""   
         
-    })
-    const {src, thumbnail, name, author, genre} = song;
+    // })
+
     const onSubmit = async (e) => {
         e.preventDefault();
-        let s = API_All + 'upload?src=' +`${song.src}`+'&thumbnail=' +
-        `${song.thumbnail}` + '&name=' + `${song.name}`+ 
-        '&author=' + `${song.author}` + '&genre=' + `${song.genre}`
-        console.log(s)
-        try {
-        const result = await axios({
+        let s = API_All + 'upload'
+        const formData = new FormData();
+        formData.append("src", src)
+        formData.append("thumbnail", thumbnail)
+        formData.append("name", name)
+        formData.append("author", author)
+        formData.append("genre", genre)
+
+        try { 
+          let result = axios({
             method: 'post',
-            url : API_All + 'upload?src=' +`${song.src}`+'&thumbnail=' +
-             `${song.thumbnail}` + '&name=' + `${song.name}`+ 
-             '&author=' + `${song.author}` + '&genre=' + `${song.genre}`
-        }) }catch{
-            navigate('/add/user')
-        }
+            url : s,
+            data : formData
+          })
+        }catch{navigate('/add/Song')}
+        // let s = API_All + 'upload?src=' +`${song.src}`+'&thumbnail=' +
+        // `${song.thumbnail}` + '&name=' + `${song.name}`+ 
+        // '&author=' + `${song.author}` + '&genre=' + `${song.genre}`
+        // console.log(s)
+        // try {
+        // const result = await axios({
+        //     method: 'post',
+        //     url : API_All + 'upload?src=' +`${song.src}`+'&thumbnail=' +
+        //      `${song.thumbnail}` + '&name=' + `${song.name}`+ 
+        //      '&author=' + `${song.author}` + '&genre=' + `${song.genre}`
+        // }) }catch{
+        //     navigate('/add/user')
+        // }
         navigate('/')
     }
 
-
-    const onInputChange = (e) => {
-        setSong({ ...song, [e.target.name]: e.target.value })
+    const handleBack= () => {
+      navigate('/')
     }
 
+
     return (
+
         <div className="container">
           <div className="w-75 mx-auto shadow p-5">
             <h2 className="text-center mb-4">Add A User</h2>
+            <button onClick = {() => handleBack()}>Back</button>
             <form onSubmit={e => onSubmit(e)}>
               <div className="form-group">
                 <input
                   type="file"
-                  className="form-control form-control-lg"
-                  placeholder="Enter Your Name"
                   name="src"
-                  value={src}
-                  onChange={e => onInputChange(e)}
+                  value=""
+                  onChange={e => setSrc(e.target.files[0])}
                 />
               </div>
               <div className="form-group">
                 <input
                   type="file"
-                  className="form-control form-control-lg"
-                  placeholder="Enter Your Username"
                   name="thumbnail"
-                  value={thumbnail}
-                  onChange={e => onInputChange(e)}
+                  value=""
+                  onChange={e => setThumbnail(e.target.files[0])}
                 />
               </div>
               <div className="form-group">
@@ -68,7 +86,7 @@ function AddSong() {
                   placeholder="Enter Song Name"
                   name="name"
                   value={name}
-                  onChange={e => onInputChange(e)}
+                  onChange={e => setName(e.target.value)}
                 />
               </div>
               <div className="form-group">
@@ -78,7 +96,7 @@ function AddSong() {
                   placeholder="Enter Song Author"
                   name="author"
                   value={author}
-                  onChange={e => onInputChange(e)}
+                  onChange={e => setAuthor(e.target.value)}
                 />
               </div>
               <div className="form-group">
@@ -88,10 +106,12 @@ function AddSong() {
                   placeholder="Enter Song Genre"
                   name="genre"
                   value={genre}
-                  onChange={e => onInputChange(e)}
+                  onChange={e => setGenre(e.target.value)}
                 />
               </div>
-              <button className="btn btn-primary btn-block">Add Song</button>
+              <span>              
+                <button className="btn btn-primary btn-block">Add Song</button>
+              </span>
             </form>
           </div>
         </div>

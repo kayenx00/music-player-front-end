@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import {useState, useEffect} from 'react'
+import {Link} from 'react-router-dom'
 function UpdateSong(song){
 const songToUpdate = song;
 console.log(songToUpdate)
@@ -17,9 +18,16 @@ return (
         <p>Song genre: {songDetail.genre}</p>
         <p>Last Update: {songDetail.lastUpdate}</p>
     </div>
-    <div>
-     
-    </div>
+    <Link to = {`/update/Song/${song.song.id}`}>
+        <button>
+            Update
+        </button>
+    </Link>
+    <Link to = {"/"}>
+        <button>
+            Back
+        </button>
+    </Link>
     <div>
      
     </div>
