@@ -13,7 +13,6 @@ function SongInfo(params) {
                     <p className="text-center mb-4">Song genre: {songToShow.genre}</p>
                     <p className="text-center mb-4">Last Update: {songToShow.lastUpdate}</p>
                 
-        {/* <Link to = {`/update/Song/${song.song.id}`}> */}
                     <span>
                         <button className="btn btn-primary btn-block" onClick={(e => params.setEdit(true))}>
                             Update
@@ -21,7 +20,6 @@ function SongInfo(params) {
                         <div>
                             <br />
                         </div>
-        {/* </Link> */}
                         <Link to = {"/"}>
                             <button className="btn btn-primary btn-block">
                                 Back

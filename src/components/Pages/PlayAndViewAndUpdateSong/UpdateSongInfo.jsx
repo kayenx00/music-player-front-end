@@ -17,16 +17,6 @@ function UpdateSongInfo(params) {
     const onSubmit = async (e) => {
       
             const s = API_All + 'update'
-            // const formData = new FormData();
-            // formData.append("id", id);
-            // formData.append("name", name);
-            // formData.append("author", author);
-            // formData.append("genre", genre);
-            // const result = await axios({
-            //     method: 'put',
-            //     url: s,
-            //     data : formData
-            // })
             const data = JSON.stringify({
               "id": id,
               "name": name,
@@ -42,8 +32,7 @@ function UpdateSongInfo(params) {
               },
               data : data
             };
-            axios(config).
-            then(function (response) {
+            axios(config).then(function (response) {
               console.log(JSON.stringify(response.data));
               navigate(`/viewAndUpdate/${id}`)
             })

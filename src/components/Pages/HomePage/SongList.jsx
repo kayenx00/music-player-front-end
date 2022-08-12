@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom'
 import { API_All } from '../../../apiUrl/API_URL';
@@ -49,8 +49,7 @@ function SongList({filteredSongs}){
             },
             data : formData
           };
-          axios(config).
-          then(function (response) {
+          axios(config).then(function (response) {
             console.log(JSON.stringify(response.data));
             navigate('/')
             window.location.reload()
@@ -99,11 +98,6 @@ function SongList({filteredSongs}){
     const handleIncreaseSongLimit = () => {
         setDataLimit( prevState => prevState + 1)
     }
-
-    const handleClick = () => {
-        console.log({ids : checked})
-    }
-
     return (
         <div>
             <button onClick ={() => AddSong()}>

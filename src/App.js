@@ -4,6 +4,7 @@ import './App.css';
 import FetchSong from './components/Pages/HomePage/FetchSong';
 import PlayAndViewAndUpdateSong from './components/Pages/PlayAndViewAndUpdateSong/PlayAndViewAndUpdateSong';
 import AddSong from './components/Pages/AddSong/AddSong';
+import NotFoundError from './components/Pages/Error/NotFoundError';
 // import UpdateSongInfo from './components/Pages/ViewAndUpdateSong/UpdateSongInfo';
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route exact path = "/" element = {<FetchSong />}/>
           <Route exact path = "/viewAndUpdate/:id" element = {<PlayAndViewAndUpdateSong/>} /> 
           <Route exact path = "/add/Song" element = {<AddSong/>} />
+          <Route path = "*" element = {<NotFoundError/> } />
           {/* <Route exact path = "/update/Song/:id" element = {< UpdateSongInfo/>}/> */}
         </Routes>
       </Router>

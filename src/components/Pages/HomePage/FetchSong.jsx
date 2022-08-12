@@ -1,6 +1,7 @@
 import { useQuery } from 'react-query';
 import React from 'react';
 import { API_All } from '../../../apiUrl/API_URL';
+import ReactLoading from 'react-loading'
 import ShowSongTable from './ShowSongTable';
 import axios from 'axios';
 function FetchSong() {
@@ -18,7 +19,8 @@ function FetchSong() {
     return ( 
         <div>
         {query.isLoading
-        ? 'Loading...'
+        ? <ReactLoading type="spin" color="#0000FF"
+        height={100} width={50}/>
         : query.isError
         ? 'Error!'
         : query.data
