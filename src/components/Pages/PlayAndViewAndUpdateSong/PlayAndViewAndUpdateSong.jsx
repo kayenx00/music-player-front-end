@@ -1,11 +1,11 @@
-import React, { useState} from 'react';
-import {useParams, Link} from 'react-router-dom'
+import React from 'react';
+import {useParams} from 'react-router-dom'
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import { API_All } from '../../../apiUrl/API_URL';
 import PlaySong from './PlaySong';
-import UpdateSong from './UpdateSong';
-function PlayAndUpdateSong() {
+import ViewAndUpdateSong from './ViewAndUpdateSong';
+function PlayAndViewAndUpdateSong() {
     const url = API_All + 'get?id='
     console.log(url)
     const {id} = useParams();
@@ -30,9 +30,7 @@ function PlayAndUpdateSong() {
         : query.data
         ? <div>
             <PlaySong song = {query.data.data.object}/>
-            <UpdateSong song = {query.data.data.object}/>
-            {/* <ShowSongTable details = {query.data.data.object} /> */}
-            {/* <button onClick={handleClick} ></button> */}
+            <ViewAndUpdateSong song = {query.data.data.object}/>
         </div>
         : null}
 
@@ -40,4 +38,4 @@ function PlayAndUpdateSong() {
     );
 }
 
-export default PlayAndUpdateSong;
+export default PlayAndViewAndUpdateSong;

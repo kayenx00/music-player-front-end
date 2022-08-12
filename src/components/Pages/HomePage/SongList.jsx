@@ -2,8 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom'
 import { API_All } from '../../../apiUrl/API_URL';
-import { useNavigate, useParams } from "react-router-dom";
-import AddSong from '../AddSong/AddSong';
+import { useNavigate} from "react-router-dom";
 function SongList({filteredSongs}){
     let navigate = useNavigate()
     const filtered = filteredSongs
@@ -35,15 +34,31 @@ function SongList({filteredSongs}){
         for(let i = 0; i < checked.length; i++){
             formData.append("id", checked[i])
         }
-        try{
-            const result = axios({
-                method:'delete',
-                url: s,
-                data: formData
-            })
-        }
-         catch {navigate('/add/Song')}
-         window.location.reload()
+        // const result = axios({
+        //         method:'delete',
+        //         url: s,
+        //         data: formData
+        //     })
+        // navigate('/add/Song')
+        // window.location.reload()
+        const config = {
+            method: 'delete',
+            url: s,
+            headers: { 
+              'Content-Type': 'application/json'
+            },
+            data : formData
+          };
+          axios(config).
+          then(function (response) {
+            console.log(JSON.stringify(response.data));
+            navigate('/')
+            window.location.reload()
+          })
+          .catch(function (error) {
+            console.log(error);
+            alert('Something went wrong, please check your input')
+          });
     }
 
     function goToNextPage() {
@@ -139,8 +154,8 @@ function SongList({filteredSongs}){
                                         onChange = {() => handleCheckBox(f.id)}/>
                                     </td>
                                     <td>{f.name}</td>
-                                    <td>{f.author.name}</td>
-                                    <td>{f.genre.name}</td>
+                                    <td>{f.author}</td>
+                                    <td>{f.genre}</td>
                                     <td>
                                         <Link  to={`/viewAndUpdate/${f.id}`}>
                                             View

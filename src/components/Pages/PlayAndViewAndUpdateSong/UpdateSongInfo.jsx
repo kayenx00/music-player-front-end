@@ -1,47 +1,63 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate, Navigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { API_All } from '../../../apiUrl/API_URL';
 
-function UpdateSongInfo() {
+function UpdateSongInfo(params) {
     
     const [name, setName] = useState("")
     const [author, setAuthor] = useState("")
     const [genre, setGenre] = useState("")
-    const {id} = useParams();
+    const id = params.song.song.id
+    console.log(params.song)
     let navigate = useNavigate()
     const handleBack = () => {
-        navigate(`/viewAndUpdate/${id}`)
+        params.setEdit(false)
     }
     const onSubmit = async (e) => {
-        try {
+      
             const s = API_All + 'update'
-            const formData = new FormData();
-            formData.append("id", id);
-            formData.append("name", name);
-            formData.append("author", author);
-            formData.append("genre", genre);
-            const result = await axios({
-                method: 'put',
-                url: s,
-                data : formData
+            // const formData = new FormData();
+            // formData.append("id", id);
+            // formData.append("name", name);
+            // formData.append("author", author);
+            // formData.append("genre", genre);
+            // const result = await axios({
+            //     method: 'put',
+            //     url: s,
+            //     data : formData
+            // })
+            const data = JSON.stringify({
+              "id": id,
+              "name": name,
+              "author": author,
+              "genre": genre
+            });
+            
+            const config = {
+              method: 'put',
+              url: s,
+              headers: { 
+                'Content-Type': 'application/json'
+              },
+              data : data
+            };
+            axios(config).
+            then(function (response) {
+              console.log(JSON.stringify(response.data));
+              navigate(`/viewAndUpdate/${id}`)
             })
-            navigate(`/viewAndUpdate/${id}`)
-
-        } catch {
-            alert('Something went wrong, please check your input')
-            console.log('Something went wrong, please check your input')
-        }
-    }
+            .catch(function (error) {
+              console.log(error);
+              alert('Something went wrong, please check your input')
+            console.log('Something went wrong, please check your input')    
+            });
+          }
     return ( 
     <div>
         <div className="container">
           <div className="w-75 mx-auto shadow p-5">
             <h2 className="text-center mb-4">Update a Song</h2>
-            <button onClick={() => handleBack()}>
-                Back
-            </button>
-            <button onClick = {() => handleBack()}>Back</button>
             <form onSubmit={e => onSubmit(e)}>
               <div className="form-group">
                 <input
@@ -75,6 +91,7 @@ function UpdateSongInfo() {
               </div>
               <span>              
                 <button className="btn btn-primary btn-block">Update Song</button>
+                <button className="btn btn-primary btn-block" onClick = {() => handleBack()}>Back</button>
               </span>
             </form>
           </div>

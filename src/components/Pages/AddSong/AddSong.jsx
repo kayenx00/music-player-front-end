@@ -1,6 +1,6 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { API_All } from '../../../apiUrl/API_URL';
 function AddSong() {
     const navigate = useNavigate();
@@ -27,14 +27,34 @@ function AddSong() {
         formData.append("name", name)
         formData.append("author", author)
         formData.append("genre", genre)
+        
 
-        try { 
-          let result = axios({
-            method: 'post',
-            url : s,
-            data : formData
-          })
-        }catch{navigate('/add/Song')}
+        const config = {
+          method: 'post',
+          url: s,
+          headers: { 
+            'Content-Type': 'application/json'
+          },
+          data : formData
+        };
+        axios(config).then(function (response) {
+          console.log(JSON.stringify(response.data));
+          navigate('add/Song')
+        })
+        .catch(function (error) {
+          console.log(error);
+          alert('Something went wrong, please check your input')
+        console.log('Something went wrong, please check your input')    
+        });
+        // try { 
+        //   let result = axios({
+        //     method: 'post',
+        //     url : s,
+        //     data : formData
+        //   })
+        // }catch (err){
+        //   throw(alert(new Error(err.response.data.message)))
+        //   navigate('/add/Song')}
         // let s = API_All + 'upload?src=' +`${song.src}`+'&thumbnail=' +
         // `${song.thumbnail}` + '&name=' + `${song.name}`+ 
         // '&author=' + `${song.author}` + '&genre=' + `${song.genre}`
@@ -48,6 +68,7 @@ function AddSong() {
         // }) }catch{
         //     navigate('/add/user')
         // }
+        // navigate('/')
         navigate('/')
     }
 

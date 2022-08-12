@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { API_All } from '../../../apiUrl/API_URL';
 import ShowSongTable from './ShowSongTable';
 import axios from 'axios';
