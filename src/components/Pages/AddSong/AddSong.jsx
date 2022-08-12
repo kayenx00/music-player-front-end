@@ -9,15 +9,10 @@ function AddSong() {
     const [name, setName] = useState("")
     const [author, setAuthor] = useState("")  
     const [genre, setGenre] = useState("")
-    // const [song, setSong] = useState({
-    //     src: "",
-    //     thumbnail: "",
-    //     name: "",
-    //     author: "",
-    //     genre: ""   
-        
-    // })
-
+    const audioUploadString = 'Upload your audio file here'
+    const imageUploadString = 'Upload your thumbnail file here'
+    const [selectedAudioFileName, setSelectedAudioFileName] = useState("")
+    const [selectedImageFileName, setSelectedImageFileName] = useState("")
     const onSubmit = async (e) => {
         e.preventDefault();
         let s = API_All + 'upload'
@@ -46,29 +41,7 @@ function AddSong() {
           alert('Something went wrong, please check your input')
         console.log('Something went wrong, please check your input')    
         });
-        // try { 
-        //   let result = axios({
-        //     method: 'post',
-        //     url : s,
-        //     data : formData
-        //   })
-        // }catch (err){
-        //   throw(alert(new Error(err.response.data.message)))
-        //   navigate('/add/Song')}
-        // let s = API_All + 'upload?src=' +`${song.src}`+'&thumbnail=' +
-        // `${song.thumbnail}` + '&name=' + `${song.name}`+ 
-        // '&author=' + `${song.author}` + '&genre=' + `${song.genre}`
-        // console.log(s)
-        // try {
-        // const result = await axios({
-        //     method: 'post',
-        //     url : API_All + 'upload?src=' +`${song.src}`+'&thumbnail=' +
-        //      `${song.thumbnail}` + '&name=' + `${song.name}`+ 
-        //      '&author=' + `${song.author}` + '&genre=' + `${song.genre}`
-        // }) }catch{
-        //     navigate('/add/user')
-        // }
-        // navigate('/')
+
         navigate('/')
     }
 
@@ -82,23 +55,36 @@ function AddSong() {
         <div className="container">
           <div className="w-75 mx-auto shadow p-5">
             <h2 className="text-center mb-4">Add A Song</h2>
-            <button onClick = {() => handleBack()}>Back</button>
             <form onSubmit={e => onSubmit(e)}>
               <div className="form-group">
+                {audioUploadString}
+                <br />
                 <input
                   type="file"
                   name="src"
                   value=""
-                  onChange={e => setSrc(e.target.files[0])}
+                  accept=".mp3,audio/*"
+                  onChange={e => {setSrc(e.target.files[0])
+                                  setSelectedAudioFileName(e.target.files[0].name)}}
                 />
+                <p>{selectedAudioFileName}</p>
               </div>
               <div className="form-group">
+              {imageUploadString}
+                <br />
                 <input
                   type="file"
                   name="thumbnail"
                   value=""
-                  onChange={e => setThumbnail(e.target.files[0])}
+                  accept="image/*"
+                  onChange={
+                    e => 
+                    {setThumbnail(e.target.files[0])
+                      setSelectedImageFileName(e.target.files[0].name)
+                  
+                                  }}
                 />
+              <p>{selectedImageFileName}</p>
               </div>
               <div className="form-group">
                 <input
@@ -132,6 +118,7 @@ function AddSong() {
               </div>
               <span>              
                 <button className="btn btn-primary btn-block">Add Song</button>
+                <button className="btn btn-primary btn-block" onClick = {() => handleBack()}>Back</button>
               </span>
             </form>
           </div>
