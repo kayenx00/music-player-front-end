@@ -39,7 +39,7 @@ function AddSong() {
         };
         axios(config).then(function (response) {
           console.log(JSON.stringify(response.data));
-          navigate('add/Song')
+          navigate('/add/song')
         })
         .catch(function (error) {
           console.log(error);
@@ -81,7 +81,7 @@ function AddSong() {
 
         <div className="container">
           <div className="w-75 mx-auto shadow p-5">
-            <h2 className="text-center mb-4">Add A User</h2>
+            <h2 className="text-center mb-4">Add A Song</h2>
             <button onClick = {() => handleBack()}>Back</button>
             <form onSubmit={e => onSubmit(e)}>
               <div className="form-group">

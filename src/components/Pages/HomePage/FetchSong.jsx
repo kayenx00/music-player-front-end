@@ -4,6 +4,7 @@ import { API_All } from '../../../apiUrl/API_URL';
 import ReactLoading from 'react-loading'
 import ShowSongTable from './ShowSongTable';
 import axios from 'axios';
+import FetchingError from '../Error/FetchingError';
 function FetchSong() {
 
     const url = API_All + 'all'
@@ -22,11 +23,10 @@ function FetchSong() {
         ? <ReactLoading type="spin" color="#0000FF"
         height={100} width={50}/>
         : query.isError
-        ? 'Error!'
+        ? <FetchingError />
         : query.data
         ? <div>
             <ShowSongTable details = {query.data.data.object} />
-            {/* <button onClick={handleClick} ></button> */}
         </div>
         : null}
         </div>

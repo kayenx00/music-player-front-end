@@ -24,7 +24,7 @@ function SongList({filteredSongs}){
         })
     }
     const AddSong = () =>{
-        navigate('/add/song')
+        navigate('/')
     }
     const deleteSongs = async () =>{
 
