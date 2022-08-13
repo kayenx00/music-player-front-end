@@ -38,7 +38,8 @@ function AddSong() {
         })
         .catch(function (error) {
           console.log(error);
-          alert('Something went wrong, please check your input')
+          alert('Something went wrong, please check your input.' + 
+          '\nThe author may already have this song with this genre')
         console.log('Something went wrong, please check your input')    
         });
     }
