@@ -34,15 +34,13 @@ function AddSong() {
         };
         axios(config).then(function (response) {
           console.log(JSON.stringify(response.data));
-          navigate('/add/song')
+          navigate('/')
         })
         .catch(function (error) {
           console.log(error);
           alert('Something went wrong, please check your input')
         console.log('Something went wrong, please check your input')    
         });
-
-        navigate('/')
     }
 
     const handleBack= () => {

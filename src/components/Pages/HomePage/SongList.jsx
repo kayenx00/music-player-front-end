@@ -8,10 +8,9 @@ function SongList({filteredSongs}){
     const filtered = filteredSongs
     const [dataLimit, setDataLimit] = useState(6)
     const numberOfSongs = filtered.length
-    const pageLimit = Math.round(numberOfSongs/dataLimit)
-    console.log(filtered)
+    const pageLimit = Math.ceil(numberOfSongs/dataLimit)
     const [checked, setChecked] = useState([])
-    const [pages] = useState(Math.round(numberOfSongs / dataLimit));
+    const [pages] = useState(Math.floor(numberOfSongs / dataLimit));
     const [currentPage, setCurrentPage] = useState(1);
     const handleCheckBox = (id) =>{
         setChecked(prev => {
@@ -24,7 +23,7 @@ function SongList({filteredSongs}){
         })
     }
     const AddSong = () =>{
-        navigate('/')
+        navigate('/add/Song')
     }
     const deleteSongs = async () =>{
 
@@ -34,13 +33,7 @@ function SongList({filteredSongs}){
         for(let i = 0; i < checked.length; i++){
             formData.append("id", checked[i])
         }
-        // const result = axios({
-        //         method:'delete',
-        //         url: s,
-        //         data: formData
-        //     })
-        // navigate('/add/Song')
-        // window.location.reload()
+
         const config = {
             method: 'delete',
             url: s,

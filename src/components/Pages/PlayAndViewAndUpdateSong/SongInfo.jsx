@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+const moment = require('moment');
+
 function SongInfo(params) {
     const songToShow = params.song;
     console.log(songToShow);
@@ -11,7 +13,7 @@ function SongInfo(params) {
                     <p className="text-center mb-4">Song name: {songToShow.name}</p>
                     <p className="text-center mb-4">Song author: {songToShow.author}</p>
                     <p className="text-center mb-4">Song genre: {songToShow.genre}</p>
-                    <p className="text-center mb-4">Last Update: {songToShow.lastUpdate}</p>
+                    <p className="text-center mb-4">Last Update: {moment(songToShow.lastUpdate).format("YYYY-MM-DD")}</p>
                 
                     <span>
                         <button className="btn btn-primary btn-block" onClick={(e => params.setEdit(true))}>

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { API_All } from '../../../apiUrl/API_URL';
 
 function UpdateSongInfo(params) {
@@ -10,7 +9,6 @@ function UpdateSongInfo(params) {
     const [genre, setGenre] = useState("")
     const id = params.song.song.id
     console.log(params.song)
-    let navigate = useNavigate()
     const handleBack = () => {
         params.setEdit(false)
     }
@@ -34,7 +32,7 @@ function UpdateSongInfo(params) {
             };
             axios(config).then(function (response) {
               console.log(JSON.stringify(response.data));
-              navigate(`/viewAndUpdate/${id}`)
+              params.setEdit(false)
             })
             .catch(function (error) {
               console.log(error);

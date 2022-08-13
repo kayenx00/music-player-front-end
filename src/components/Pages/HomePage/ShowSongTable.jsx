@@ -11,12 +11,12 @@ function ShowSongTable({details}) {
             .toLowerCase()
             .includes(searchField.toLowerCase()) ||
             song
-            .author.name
+            .author
             .toLowerCase()
             .includes(searchField.toLowerCase())
             ||
             song
-            .genre.name
+            .genre
             .toLowerCase()
             .includes(searchField.toLowerCase())
           );
