@@ -45,7 +45,7 @@ function AddSong() {
     }
 
     const handleBack= () => {
-      navigate('/')
+      navigate('/songs')
     }
 
 
