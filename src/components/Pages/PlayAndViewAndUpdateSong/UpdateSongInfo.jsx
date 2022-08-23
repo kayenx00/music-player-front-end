@@ -12,8 +12,8 @@ function UpdateSongInfo(params) {
     const handleBack = () => {
         params.setEdit(false)
     }
-    const onSubmit = async (e) => {
-      
+    async function  onSubmit  (e) {
+            e.preventdefault()
             const s = API_All + 'update'
             const data = JSON.stringify({
               "id": id,
@@ -45,7 +45,7 @@ function UpdateSongInfo(params) {
         <div className="container">
           <div className="w-75 mx-auto shadow p-5">
             <h2 className="text-center mb-4">Update a Song</h2>
-            <form onSubmit={e => onSubmit(e)}>
+            <form onSubmit={onSubmit}>
               <div className="form-group">
                 <input
                   type="text"
