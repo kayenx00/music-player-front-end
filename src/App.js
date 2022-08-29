@@ -7,13 +7,19 @@ import AddSong from './components/Pages/AddSong/AddSong';
 import NotFoundError from './components/Pages/Error/NotFoundError';
 import Login from './components/Pages/Authentication/Login';
 import ProtectedRoutes from './components/Pages/Authentication/ProtectedRoutes';
+import Logout from './components/Pages/Authentication/Logout';
 // import UpdateSongInfo from './components/Pages/ViewAndUpdateSong/UpdateSongInfo';
 function App() {
-  const [isLoggedin, setIsLoggedin] = useState(false)
+  const token = localStorage.getItem('token')
+  const [isLoggedin, setIsLoggedin] = useState(true ? token : false)
+  console.log(isLoggedin)
   return (
     <div>
       <Router>
         <Routes>
+          {/* <Route exact path = "/" element = {<FetchSong />}/>
+          <Route exact path = "/viewAndUpdate/:id" element = {<PlayAndViewAndUpdateSong/>} /> 
+          <Route exact path = "/add/Song" element = {<AddSong/>} /> */}
           <Route exact path = "/" element = {<Login setIsLoggedin = {setIsLoggedin}/>}/>
           <Route element = {<ProtectedRoutes isLoggedin={isLoggedin}/>}>
             <Route exact path = "/songs" element = {<FetchSong />}/>

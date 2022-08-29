@@ -12,25 +12,31 @@ function UpdateSongInfo(params) {
     const handleBack = () => {
         params.setEdit(false)
     }
-    async function  onSubmit  (e) {
+    const onSubmit = async (e) => {
             e.preventdefault()
             const s = API_All + 'update'
-            const data = JSON.stringify({
-              "id": id,
-              "name": name,
-              "author": author,
-              "genre": genre
-            });
-            
+            // const data = JSON.stringify({
+            //   "id": id,
+            //   "name": name,
+            //   "author": author,
+            //   "genre": genre
+            // });
+            const token = localStorage.getItem('token')
+            const formData = new FormData()
+            formData.append('id', id)
+            formData.append('name', name)
+            formData.append('author', author)
+            formData.append('genre', genre)
             const config = {
               method: 'put',
               url: s,
-              headers: { 
-                'Content-Type': 'application/json'
+              headers: {
+                Authorization: `Bearer ${token}`
               },
-              data : data
+        
+              data : formData
             };
-            axios(config).then(function (response) {
+            await axios(config).then(function (response) {
               console.log(JSON.stringify(response.data));
               params.setEdit(false)
             })
@@ -77,7 +83,7 @@ function UpdateSongInfo(params) {
                 />
               </div>
               <span>              
-                <button className="btn btn-primary btn-block">Update Song</button>
+                <button type = "submit" className="btn btn-primary btn-block">Update Song</button>
                 <button className="btn btn-primary btn-block" onClick = {() => handleBack()}>Back</button>
               </span>
             </form>

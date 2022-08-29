@@ -3,8 +3,10 @@ import axios from 'axios';
 import {Link} from 'react-router-dom'
 import { API_All } from '../../../apiUrl/API_URL';
 import { useNavigate} from "react-router-dom";
+import Logout from '../Authentication/Logout';
 function SongList({filteredSongs}){
     let navigate = useNavigate()
+    const token = localStorage.getItem('token')
     const filtered = filteredSongs
     const [dataLimit, setDataLimit] = useState(6)
     const numberOfSongs = filtered.length
@@ -25,6 +27,10 @@ function SongList({filteredSongs}){
     const AddSong = () =>{
         navigate('/add/Song')
     }
+        const handleLogout = () => {
+        localStorage.removeItem('token')
+        navigate("/")
+    }
     const deleteSongs = async () =>{
 
         // await axios.delete(API_All + '')
@@ -38,7 +44,9 @@ function SongList({filteredSongs}){
             method: 'delete',
             url: s,
             headers: { 
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json', 
+              Authorization: `Bearer ${token}`
+
             },
             data : formData
           };
@@ -52,7 +60,9 @@ function SongList({filteredSongs}){
             alert('Something went wrong, please check your input')
           });
     }
-
+    const goToDetail = (id) => {
+        navigate("/viewAndUpdate/" + id)
+    } 
     function goToNextPage() {
 
         setCurrentPage((page) => page + 1);
@@ -95,6 +105,9 @@ function SongList({filteredSongs}){
         <div>
             <button onClick ={() => AddSong()}>
                 Add Song
+                </button>
+            <button onClick ={() => handleLogout()}>
+                Log out 
                 </button>
             <div className = 'rows'>
                 <table className = "table table-striped table-bordered">
@@ -144,9 +157,12 @@ function SongList({filteredSongs}){
                                     <td>{f.author}</td>
                                     <td>{f.genre}</td>
                                     <td>
-                                        <Link  to={`/viewAndUpdate/${f.id}`}>
+                                        {/* <Link to={`/viewAndUpdate/${f.id}`}>
                                             View
-                                        </Link>
+                                        </Link> */}
+                                        <button onClick={() => goToDetail(f.id)}>
+                                            View
+                                        </button>
                                     </td>
 
                                 </tr>

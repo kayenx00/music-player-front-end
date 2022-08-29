@@ -13,6 +13,7 @@ function AddSong() {
     const imageUploadString = 'Upload your thumbnail file here'
     const [selectedAudioFileName, setSelectedAudioFileName] = useState("")
     const [selectedImageFileName, setSelectedImageFileName] = useState("")
+    const token = localStorage.getItem('token')
     const onSubmit = async (e) => {
         e.preventDefault();
         let s = API_All + 'upload'
@@ -22,19 +23,19 @@ function AddSong() {
         formData.append("name", name)
         formData.append("author", author)
         formData.append("genre", genre)
-        
-
         const config = {
           method: 'post',
           url: s,
           headers: { 
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+             Authorization: `Bearer ${token}`
+
           },
           data : formData
         };
         axios(config).then(function (response) {
           console.log(JSON.stringify(response.data));
-          navigate('/')
+          window.location.reload()
         })
         .catch(function (error) {
           console.log(error);

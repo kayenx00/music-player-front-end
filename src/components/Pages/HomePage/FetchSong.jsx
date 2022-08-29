@@ -6,14 +6,17 @@ import ShowSongTable from './ShowSongTable';
 import axios from 'axios';
 import FetchingError from '../Error/FetchingError';
 function FetchSong() {
-
+    const token = localStorage.getItem('token');
     const url = API_All + 'all'
 
     const fetchSongs = async () => {
         const fetchData = await axios({
             method: 'get',
-            url: url
-        })
+            url: url,
+            headers: {
+                Authorization: `Bearer ${token}`
+
+        }})
         return fetchData;
     }
     const query = useQuery('songs', fetchSongs)
