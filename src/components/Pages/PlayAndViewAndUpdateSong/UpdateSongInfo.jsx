@@ -28,7 +28,7 @@ function UpdateSongInfo(params) {
             formData.append('author', author)
             formData.append('genre', genre)
             const config = {
-              method: 'put',
+              method: 'post',
               url: s,
               headers: {
                 Authorization: `Bearer ${token}`

@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import fbLogo from '../../../img/fb-logo.png'
+import googleLogo from '../../../img/google-logo.png'
+import githubLogo from '../../../img/github-logo.png'
+import './Login.css'
 function Login(params) {
   const navigate = new useNavigate()
   const [username, setUsername] = useState("")
@@ -48,34 +52,49 @@ await axios(config)
                 </button>
             </Link>
 
-            <div className="container">
-          <div className="w-75 mx-auto shadow p-5">
-            <h2 className="text-center mb-4">Login</h2>
+          <div className="login-container">
+          <div className="login-content">
+            <h2 className="login-title">Login</h2>
+            <div className="social-login">
+                <a className="btn btn-block social-btn google" href = "https://accounts.google.com/">
+                    <img src={googleLogo} alt="Google" /> Log in with Google</a>
+                <a className="btn btn-block social-btn facebook" href = "https://www.facebook.com/" >
+                    <img src={fbLogo} alt="Facebook" /> Log in with Facebook</a>
+                <a className="btn btn-block social-btn github" href = "https://github.com/">
+                    <img src={githubLogo} alt="Github" /> Log in with Github</a>
+            </div>
+            <div className="or-separator">
+                        <span className="or-text">OR</span>
+                    </div>
             <form onSubmit={(e) => onSubmit(e)}>
-              <div className="form-group">
+              <div className="form-item">
                 <input
-                  type="text"
-                  className="form-control form-control-lg"
+                  type="email"
+                  className="form-control "
                   placeholder="Enter User Name"
                   name="username"
                   value={username}
                   onChange={e => setUsername(e.target.value)}
                 />
               </div>
-              <div className="form-group">
+              <div className="form-item">
                 <input
-                  type="text"
-                  className="form-control form-control-lg"
+                  type="password"
+                  className="form-control"
                   placeholder="Enter Password"
                   name="password"
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                 />
               </div>
-              <span>              
-                <button className="btn btn-primary btn-block">Login</button>
-                <button className="btn btn-primary btn-block" onClick = {() => handleBack()}>Back</button>
-              </span>
+              <div className="form-item">
+                <span>              
+                  <button className="btn btn-primary btn-block">Login</button>
+                  <button className="btn btn-primary btn-block" onClick = {() => handleBack()}>Back</button>
+                </span>
+
+              </div>
+              
             </form>
           </div>
         </div>
