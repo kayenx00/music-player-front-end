@@ -27,10 +27,10 @@ function SongList({filteredSongs}){
     const AddSong = () =>{
         navigate('/add/Song')
     }
-        const handleLogout = () => {
-        localStorage.removeItem('token')
-        navigate("/")
-    }
+    //     const handleLogout = () => {
+    //     localStorage.removeItem('token')
+    //     navigate("/")
+    // }
     const deleteSongs = async () =>{
 
         // await axios.delete(API_All + '')
@@ -106,9 +106,9 @@ function SongList({filteredSongs}){
             <button onClick ={() => AddSong()}>
                 Add Song
                 </button>
-            <button onClick ={() => handleLogout()}>
+            {/* <button onClick ={() => handleLogout()}>
                 Log out 
-                </button>
+                </button> */}
             <div className = 'rows'>
                 <table className = "table table-striped table-bordered">
                     <thead>

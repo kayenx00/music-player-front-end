@@ -8,14 +8,17 @@ import NotFoundError from './components/Pages/Error/NotFoundError';
 import Login from './components/Pages/Authentication/Login';
 import ProtectedRoutes from './components/Pages/Authentication/ProtectedRoutes';
 import Logout from './components/Pages/Authentication/Logout';
+import NavBar from './components/Pages/NavBar/NavBar';
 // import UpdateSongInfo from './components/Pages/ViewAndUpdateSong/UpdateSongInfo';
 function App() {
   const token = localStorage.getItem('token')
-  const [isLoggedin, setIsLoggedin] = useState(true ? token : false)
+  const [isLoggedin, setIsLoggedin] = useState(token ? true : false)
   console.log(isLoggedin)
   return (
     <div>
       <Router>
+      <NavBar isAuth = {isLoggedin}
+              setIsLoggedin = {setIsLoggedin}/>
         <Routes>
           {/* <Route exact path = "/" element = {<FetchSong />}/>
           <Route exact path = "/viewAndUpdate/:id" element = {<PlayAndViewAndUpdateSong/>} /> 
