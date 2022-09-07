@@ -51,7 +51,7 @@ function UpdateSongInfo(params) {
         <div className="container">
           <div className="w-75 mx-auto shadow p-5">
             <h2 className="text-center mb-4">Update a Song</h2>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={(e) => onSubmit(e)}>
               <div className="form-group">
                 <input
                   type="text"

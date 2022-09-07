@@ -13,6 +13,22 @@ import NavBar from './components/Pages/NavBar/NavBar';
 function App() {
   const token = localStorage.getItem('token')
   const [isLoggedin, setIsLoggedin] = useState(token ? true : false)
+  if(token != null){
+    const current = new Date();
+    const currentToMilliseconds = current.getTime();
+    const previous = localStorage.getItem('DateOfLastLogin')
+    const previousDate = Date.parse(previous);
+    // const a = previousDate.getTime();
+    console.log("Previous " + previousDate);
+    console.log("Current " + currentToMilliseconds);
+    console.log(currentToMilliseconds - previousDate);
+    const checkDuration = currentToMilliseconds - previousDate;
+    if(checkDuration >= 5000){
+      localStorage.removeItem('token');
+      setIsLoggedin(false);
+    }
+  }
+
   console.log(isLoggedin)
   return (
     <div>

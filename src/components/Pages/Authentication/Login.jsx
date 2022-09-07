@@ -8,8 +8,12 @@ function Login(params) {
   const navigate = new useNavigate()
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const handleClick= async () => {
+  const handleClick = async () => {
+    const DateOfLastLogin = new Date();
+    localStorage.setItem('token', "blaa")
+    localStorage.setItem('DateOfLastLogin', DateOfLastLogin);
     params.setIsLoggedin(true)
+    navigate('/');
 }
   const  onSubmit = async (e) => {
     e.preventDefault()
@@ -45,12 +49,12 @@ await axios(config)
 }
   return ( 
         <div>
+            <button onClick={() => handleClick()}>
+                Login
+            </button>
             <form action=""></form>
-            <Link to = "/songs">
-                <button onClick={e => handleClick()}>
-                    Login
-                </button>
-            </Link>
+
+
 
           <div className="login-container">
           <div className="login-content">
