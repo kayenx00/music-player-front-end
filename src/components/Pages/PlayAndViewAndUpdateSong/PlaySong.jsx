@@ -7,7 +7,7 @@ return (
 <div>
     {
         <div className="container">
-            <div className="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+            <div className="mx-auto col-lg-3 col-md-3 col-sm-4 col-xs-6">
             <audio controls>
                 <source src={songToUpdate.song.src} type="audio/mpeg" />                
             </audio>

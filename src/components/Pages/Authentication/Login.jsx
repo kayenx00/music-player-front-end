@@ -8,13 +8,13 @@ function Login(params) {
   const navigate = new useNavigate()
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const handleClick = async () => {
-    const DateOfLastLogin = new Date();
-    localStorage.setItem('token', "blaa")
-    localStorage.setItem('DateOfLastLogin', DateOfLastLogin);
-    params.setIsLoggedin(true)
-    navigate('/');
-}
+//   const handleClick = async () => {
+//     const DateOfLastLogin = new Date();
+//     localStorage.setItem('token', "blaa")
+//     localStorage.setItem('DateOfLastLogin', DateOfLastLogin);
+//     params.setIsLoggedin(true)
+//     navigate('/');
+// }
   const  onSubmit = async (e) => {
     e.preventDefault()
     const axios = require('axios');
@@ -34,8 +34,10 @@ function Login(params) {
 
 await axios(config)
 .then(function (response) {
-  console.log(response.data.object.token);
+  const DateOfLastLogin = new Date();
+  // console.log(response.data.object.token);
   localStorage.setItem('token', response.data.object.token)
+  localStorage.setItem('DateOfLastLogin', DateOfLastLogin);
   params.setIsLoggedin(true)
   navigate("/songs")
 })
@@ -49,9 +51,9 @@ await axios(config)
 }
   return ( 
         <div>
-            <button onClick={() => handleClick()}>
+            {/* <button onClick={() => handleClick()}>
                 Login
-            </button>
+            </button> */}
             <form action=""></form>
 
 
@@ -73,7 +75,7 @@ await axios(config)
             <form onSubmit={(e) => onSubmit(e)}>
               <div className="form-item">
                 <input
-                  type="email"
+                  type="text"
                   className="form-control "
                   placeholder="Enter User Name"
                   name="username"

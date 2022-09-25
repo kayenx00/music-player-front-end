@@ -5,7 +5,7 @@ function NavBar(params) {
     console.log(params.isAuth);
     const handleLogout=() =>{
         params.setIsLoggedin(false);
-        localStorage.removeItem('token')
+        localStorage.clear();
         navigate('/');
     }
 
